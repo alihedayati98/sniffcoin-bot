@@ -1,7 +1,12 @@
 import telebot
 import os
+import sys
 
-API_TOKEN = os.getenv("BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
+API_TOKEN = os.getenv("BOT_TOKEN")
+
+if not API_TOKEN:
+    print("Error: BOT_TOKEN is not set in environment variables.")
+    sys.exit(1)
 
 bot = telebot.TeleBot(API_TOKEN)
 
@@ -13,4 +18,4 @@ def send_welcome(message):
 def echo_all(message):
     bot.reply_to(message, "فعلاً در حال یادگیری شکارم...")
 
-bot.polling()
+bot.polling(none_stop=True)
